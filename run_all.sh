@@ -1,0 +1,9 @@
+#!/bin/bash
+./build/first_order_upwind
+./build/lax_wendroff
+./build/beam_warming
+./build/fromm
+./build/tvd_minmod
+./build/tvd_superbee
+./build/tvd_van_leer
+./build/tvd_van_albada
