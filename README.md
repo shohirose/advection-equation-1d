@@ -43,7 +43,7 @@ For Windows,
 $ .\run_all.ps1
 ```
 
-To visualize results, open [`plot.ipynb`](https://github.com/shohirose/basic-cfd2/main/plot.ipynb) with Jupyter Lab, and run all cells.
+To visualize results, open [`plot.ipynb`](./plot.ipynb) with Jupyter Lab, and run all cells.
 
 # References
 1. 肖鋒・長﨑孝夫　2020　数値流体解析の基礎 －Visual C++とgnuplotによる圧縮性・非圧縮性流体解析－　コロナ社
