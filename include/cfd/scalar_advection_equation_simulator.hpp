@@ -12,6 +12,14 @@ template <typename RiemannSolver, typename SpacialReconstructor,
           typename TimeIntegrator>
 class ScalarAdvectionEquationSimulator {
  public:
+  /**
+   * @brief Construct a new Scalar Advection Equation Simulator object
+   *
+   * @param params Problem parameters
+   * @param solver Riemann solver
+   * @param reconstructor Spacial reconstructor
+   * @param integrator Time integrator
+   */
   ScalarAdvectionEquationSimulator(const ProblemParameters& params,
                                    const RiemannSolver& solver,
                                    const SpacialReconstructor& reconstructor,
@@ -24,6 +32,13 @@ class ScalarAdvectionEquationSimulator {
         integrator_{integrator},
         boundary_{params} {}
 
+  /**
+   * @brief Run simulator
+   *
+   * @tparam Derived
+   * @param u0 Initial condition
+   * @return Eigen::VectorXd Values at the end of time steps.
+   */
   template <typename Derived>
   Eigen::VectorXd run(const Eigen::MatrixBase<Derived>& u0) const noexcept {
     using Eigen::seqN;

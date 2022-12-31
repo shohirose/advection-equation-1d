@@ -2,7 +2,6 @@
 
 #include "cfd/cfd.hpp"
 #include "common.hpp"
-#include "scalar_advection_equation_simulator.hpp"
 #include "text_file_writer.hpp"
 
 int main(int argc, char** argv) {

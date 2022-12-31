@@ -35,6 +35,7 @@ add_library(cfd
         include/cfd/slope_limiters.hpp
         include/cfd/spacial_reconstruction_schemes.hpp
         include/cfd/time_integration_schemes.hpp
+        include/cfd/scalar_advection_equation_simulator.hpp
         include/cfd/cfd.hpp
     )
 
