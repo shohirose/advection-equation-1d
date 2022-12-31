@@ -13,7 +13,7 @@ is solved by using the finie difference method. Currently, the following spacial
 - Lax-Wendroff scheme
 - 1st-order upwind scheme
 - Beam-Warming scheme
-- From scheme
+- Fromm scheme
 - TVD scheme with minmod, Superbee, van Leer, and van Albada slope limieters.
 
 In addition, periodic boundaries, the Roe-Riemann solver, and the explicit Euler scheme for time integration are used.
