@@ -40,7 +40,7 @@ struct SuperbeeLimiter {
  * \Phi (r) = \frac{r + |r|}{1 + |r|}
  * @f]
  */
-struct VanLeerLimieter {
+struct VanLeerLimiter {
   template <typename Derived>
   static Eigen::VectorXd eval(const Eigen::MatrixBase<Derived>& r) noexcept {
     return ((r.array() + r.array().abs()) / (1 + r.array().abs())).matrix();
@@ -54,7 +54,7 @@ struct VanLeerLimieter {
  * \Phi (r) = \frac{r + r^2}{1 + r^2}
  * @f]
  */
-struct VanAlbadaLimieter {
+struct VanAlbadaLimiter {
   template <typename Derived>
   static Eigen::VectorXd eval(const Eigen::MatrixBase<Derived>& r) noexcept {
     const Eigen::VectorXd r2 = r.array().square().matrix();

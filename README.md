@@ -14,7 +14,7 @@ is solved by using the finie difference method. Currently, the following spacial
 - 1st-order upwind scheme
 - Beam-Warming scheme
 - Fromm scheme
-- TVD scheme with minmod, Superbee, van Leer, and van Albada slope limieters.
+- TVD scheme with minmod, Superbee, van Leer, and van Albada slope limiters.
 
 In addition, periodic boundaries, the Roe-Riemann solver, and the explicit Euler scheme for time integration are used.
 

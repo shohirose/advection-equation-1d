@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
   const VectorXd x = cfd::make_x(params);
   const auto simulator = cfd::make_simulator(
       params, cfd::RoeRiemannSolver{params.velocity},
-      cfd::TvdSpacialReconstructor<cfd::VanLeerLimieter>{params},
+      cfd::TvdSpacialReconstructor<cfd::VanLeerLimiter>{params},
       cfd::ExplicitEulerScheme{params});
 
   // Sine wave
