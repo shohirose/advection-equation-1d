@@ -1,6 +1,5 @@
-# basic-cfd2: Basic CFD
-C++ source code for basic computational fluid dynamics.
-Problems are taken from [1].
+# 1-D Advection Equation
+C++ source code to solve one-dimensional scalar advection equation. Problems are taken from [1].
 
 1-D scalar advection equation with constant velocity
 
