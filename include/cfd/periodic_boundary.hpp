@@ -1,9 +1,8 @@
 #ifndef CFD_PERIODIC_BOUNDARY_HPP
 #define CFD_PERIODIC_BOUNDARY_HPP
 
-#include <assert.h>
-
 #include <Eigen/Core>
+#include <cassert>
 
 #include "cfd/problem_parameters.hpp"
 
