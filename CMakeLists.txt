@@ -11,21 +11,10 @@ FetchContent_Declare(
 set(EIGEN_BUILD_DOC OFF CACHE BOOL "" FORCE)
 set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "" FORCE)
 
-# --------------------------- Googletest library -------------------------------
-FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP ON
-    )
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
-set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
-
 FetchContent_MakeAvailable(Eigen)
-FetchContent_MakeAvailable(googletest)
 
 # ------------------------------------------------------------------------------
-project(basic-cfd2 CXX)
+project(advection-equation-1d CXX)
 
 add_library(cfd
     INTERFACE
@@ -47,11 +36,15 @@ target_link_libraries(cfd
 target_compile_features(cfd INTERFACE cxx_std_17)
 target_compile_options(cfd
     INTERFACE
-    $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic>
-    $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra -Wpedantic>
-    $<$<CXX_COMPILER_ID:MSVC>:/W3>
-    $<$<CXX_COMPILER_ID:Intel>:$<IF:$<PLATFORM_ID:Windows>,/W3,-w3>>
-    $<$<CXX_COMPILER_ID:IntelLLVM>:$<IF:$<PLATFORM_ID:Windows>,/W3,-w3>>
+        $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic>
+        $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra -Wpedantic>
+        $<$<CXX_COMPILER_ID:MSVC>:/W3>
+        $<$<CXX_COMPILER_ID:Intel>:$<IF:$<PLATFORM_ID:Windows>,/W3,-w3>>
+        $<$<CXX_COMPILER_ID:IntelLLVM>:$<IF:$<PLATFORM_ID:Windows>,/W3,-w3>>
+    )
+target_compile_definitions(cfd
+    INTERFACE
+        $<$<CXX_COMPILER_ID:MSVC>:_USE_MATH_DEFINES NOMINMAX>
     )
 
 function(add_simulator name)
@@ -62,10 +55,6 @@ function(add_simulator name)
         )
     target_include_directories(${name} PRIVATE src/)
     target_link_libraries(${name} PRIVATE cfd)
-    target_compile_definitions(${name}
-        PRIVATE
-            $<$<CXX_COMPILER_ID:MSVC>:_USE_MATH_DEFINES NOMINMAX>
-        )
 endfunction()
 
 add_simulator(first_order_upwind)
@@ -76,14 +65,3 @@ add_simulator(tvd_minmod)
 add_simulator(tvd_superbee)
 add_simulator(tvd_van_leer)
 add_simulator(tvd_van_albada)
-
-enable_testing()
-add_executable(cfd_tests test/cfd_tests.cpp)
-target_link_libraries(cfd_tests
-    PRIVATE
-        cfd
-        GTest::gtest_main
-    )
-
-include(GoogleTest)
-gtest_discover_tests(cfd_tests)
