@@ -2,6 +2,7 @@
 #define CFD_SPACIAL_RECONSTRUCTION_SCHEMES_HPP
 
 #include <Eigen/Core>
+#include <cassert>
 
 #include "cfd/problem_parameters.hpp"
 

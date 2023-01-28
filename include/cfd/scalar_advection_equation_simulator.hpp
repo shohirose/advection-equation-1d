@@ -17,19 +17,14 @@ class ScalarAdvectionEquationSimulator {
    *
    * @param params Problem parameters
    * @param solver Riemann solver
-   * @param reconstructor Spacial reconstructor
-   * @param integrator Time integrator
    */
-  ScalarAdvectionEquationSimulator(const ProblemParameters& params,
-                                   const RiemannSolver& solver,
-                                   const SpacialReconstructor& reconstructor,
-                                   const TimeIntegrator& integrator)
+  ScalarAdvectionEquationSimulator(const ProblemParameters& params)
       : n_boundary_cells_{params.n_boundary_cells},
         n_domain_cells_{params.n_domain_cells},
         n_timesteps_{params.n_timesteps},
-        solver_{solver},
-        reconstructor_{reconstructor},
-        integrator_{integrator},
+        solver_{params},
+        reconstructor_{params},
+        integrator_{params},
         boundary_{params} {}
 
   /**
@@ -72,16 +67,6 @@ class ScalarAdvectionEquationSimulator {
   TimeIntegrator integrator_;
   PeriodicBoundary boundary_;
 };
-
-template <typename RiemannSolver, typename SpacialReconstructor,
-          typename TimeIntegrator>
-ScalarAdvectionEquationSimulator<RiemannSolver, SpacialReconstructor,
-                                 TimeIntegrator>
-make_simulator(const ProblemParameters& params, const RiemannSolver& solver,
-               const SpacialReconstructor& reconstructor,
-               const TimeIntegrator& integrator) {
-  return {params, solver, reconstructor, integrator};
-}
 
 }  // namespace cfd
 

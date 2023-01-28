@@ -4,16 +4,22 @@
 #include "common.hpp"
 #include "text_file_writer.hpp"
 
+namespace cfd {
+
+using Simulator =
+    ScalarAdvectionEquationSimulator<RoeRiemannSolver,
+                                     TvdSpacialReconstructor<VanLeerLimiter>,
+                                     ExplicitEulerScheme>;
+
+}
+
 int main(int argc, char** argv) {
   using Eigen::VectorXd;
   namespace fs = std::filesystem;
 
   const auto params = cfd::make_params();
   const VectorXd x = cfd::make_x(params);
-  const auto simulator = cfd::make_simulator(
-      params, cfd::RoeRiemannSolver{params.velocity},
-      cfd::TvdSpacialReconstructor<cfd::VanLeerLimiter>{params},
-      cfd::ExplicitEulerScheme{params});
+  const auto simulator = cfd::Simulator{params};
 
   // Sine wave
   {

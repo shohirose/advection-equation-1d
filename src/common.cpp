@@ -21,8 +21,9 @@ ProblemParameters make_params() noexcept {
   const auto dt = 0.2 * dx;
   const int n_timesteps = 500;
   const double velocity = 1.0;
+  const double eps = 0.25;
 
-  return {n_timesteps, n_domain_cells, n_boundary_cells, dt, dx, velocity};
+  return {n_timesteps, n_domain_cells, n_boundary_cells, dt, dx, velocity, eps};
 }
 
 Eigen::VectorXd make_x(const ProblemParameters& params) noexcept {

@@ -2,12 +2,18 @@
 #define CFD_RIEMANN_SOLVERS_HPP
 
 #include <Eigen/Core>
+#include <cassert>
+
+#include "cfd/problem_parameters.hpp"
 
 namespace cfd {
 
 class RoeRiemannSolver {
  public:
   RoeRiemannSolver(double velocity) : velocity_{velocity} {}
+
+  RoeRiemannSolver(const ProblemParameters& params)
+      : velocity_{params.velocity} {}
 
   template <typename Derived1, typename Derived2>
   Eigen::VectorXd calc_flux(
@@ -23,6 +29,9 @@ class RoeRiemannSolver {
 class LocalLaxFriedrichsRiemannSolver {
  public:
   LocalLaxFriedrichsRiemannSolver(double velocity) : velocity_{velocity} {}
+
+  LocalLaxFriedrichsRiemannSolver(const ProblemParameters& params)
+      : velocity_{params.velocity} {}
 
   template <typename Derived1, typename Derived2>
   Eigen::VectorXd calc_flux(
@@ -47,6 +56,11 @@ class HartenRiemannSolver {
   HartenRiemannSolver(double velocity, double eps = 0.25)
       : velocity_{velocity}, eps_{eps} {
     assert(eps >= 0 && eps <= 0.5);
+  }
+
+  HartenRiemannSolver(const ProblemParameters& params)
+      : velocity_{params.velocity}, eps_{params.eps} {
+    assert(eps_ >= 0 && eps_ <= 0.5);
   }
 
   template <typename Derived1, typename Derived2>

@@ -24,16 +24,7 @@ struct ProblemParameters {
   double dt;             ///> Time step length
   double dx;             ///> Cell length
   double velocity;       ///> Velocity
-
-  ProblemParameters(int n_timesteps_, int n_domain_cells_,
-                    int n_boundary_cells_, double dt_, double dx_,
-                    double velocity_)
-      : n_timesteps{n_timesteps_},
-        n_domain_cells{n_domain_cells_},
-        n_boundary_cells{n_boundary_cells_},
-        dt{dt_},
-        dx{dx_},
-        velocity{velocity_} {}
+  double eps;            ///> Entropy fix parameter for Harten-Riemann solver
 
   /**
    * @brief Returns the number of total cells (domain + boundary cells)
