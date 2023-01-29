@@ -11,7 +11,15 @@ FetchContent_Declare(
 set(EIGEN_BUILD_DOC OFF CACHE BOOL "" FORCE)
 set(EIGEN_BUILD_PKGCONFIG OFF CACHE BOOL "" FORCE)
 
+# ------------------------------ fmt library -----------------------------------
+FetchContent_Declare(
+    fmt
+    URL https://github.com/fmtlib/fmt/archive/refs/tags/9.1.0.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP ON
+    )
+
 FetchContent_MakeAvailable(Eigen)
+FetchContent_MakeAvailable(fmt)
 
 # ------------------------------------------------------------------------------
 project(advection-equation-1d CXX)
@@ -26,12 +34,14 @@ add_library(cfd
         include/cfd/time_integration_schemes.hpp
         include/cfd/scalar_advection_equation_simulator.hpp
         include/cfd/cfd.hpp
+        include/cfd/text_file_writer.hpp
     )
 
 target_include_directories(cfd INTERFACE include/)
 target_link_libraries(cfd
     INTERFACE
         Eigen3::Eigen
+        fmt::fmt
     )
 target_compile_features(cfd INTERFACE cxx_std_17)
 target_compile_options(cfd
@@ -51,7 +61,6 @@ function(add_simulator name)
     add_executable(${name}
         src/${name}.cpp
         src/common.cpp
-        src/text_file_writer.cpp
         )
     target_include_directories(${name} PRIVATE src/)
     target_link_libraries(${name} PRIVATE cfd)

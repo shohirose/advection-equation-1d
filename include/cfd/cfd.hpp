@@ -7,6 +7,7 @@
 #include "cfd/scalar_advection_equation_simulator.hpp"
 #include "cfd/slope_limiters.hpp"
 #include "cfd/spacial_reconstruction_schemes.hpp"
+#include "cfd/text_file_writer.hpp"
 #include "cfd/time_integration_schemes.hpp"
 
 #endif  // CFD_CFD_HPP

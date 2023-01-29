@@ -2,7 +2,6 @@
 
 #include "cfd/cfd.hpp"
 #include "common.hpp"
-#include "text_file_writer.hpp"
 
 namespace cfd {
 
